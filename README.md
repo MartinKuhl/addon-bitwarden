@@ -77,3 +77,4 @@ SOFTWARE.
 [releases]: https://github.com/MartinKuhl/addon-bitwarden/releases
 [repository]: https://github.com/MartinKuhl/ha-repository
 [vaultwarden]: https://github.com/dani-garcia/vaultwarden
+[frenck]: https://github.com/frenck
