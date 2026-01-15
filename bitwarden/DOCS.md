@@ -1,4 +1,4 @@
-# Home Assistant Community Add-on: Vaultwarden (Bitwarden)
+# Home Assistant Community Add-on: Vaultwarden (Bitwarden) (Forked)
 
 Bitwarden is an open-source password manager that can store sensitive
 information such as website credentials in an encrypted vault.
