@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["helpers:pinGitHubActionDigests"],
   "rebaseWhen": "behind-base-branch",
   "dependencyDashboard": true,
   "labels": ["dependencies", "no-stale"],
@@ -8,7 +9,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["//Dockerfile$/", "//build.yaml$/"],
+      "fileMatch": ["(^|/)Dockerfile$", "(^|/)build\\.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
@@ -18,10 +19,10 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["//Dockerfile$/"],
+      "fileMatch": ["(^|/)Dockerfile$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "\\s\\s(?<package>[a-z0-9][a-z0-9-]+)=(?<currentValue>[a-z0-9-:_+~.]+)\\s+"
+        "\\s+(?<package>[a-z0-9][a-z0-9-]+)=(?<currentValue>[a-z0-9-:_+~.]+)\\s*"
       ],
       "versioningTemplate": "deb",
       "datasourceTemplate": "repology",
@@ -29,9 +30,11 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["//Dockerfile$/"],
+      "fileMatch": ["(^|/)Dockerfile$"],
       "matchStringsStrategy": "any",
-      "matchStrings": ["FROM \"vaultwarden/server:(?<currentValue>.*?)\"\\s+"],
+      "matchStrings": [
+        "FROM vaultwarden/server:(?<currentValue>[^\\s]+)"
+      ],
       "depNameTemplate": "vaultwarden/server",
       "datasourceTemplate": "docker"
     }
@@ -42,12 +45,12 @@
       "automerge": true
     },
     {
-      "groupName": "Add-on base image",
+      "groupName": "App base image",
       "matchDatasources": ["docker"],
       "matchDepNames": ["ghcr.io/hassio-addons/debian-base"]
     },
     {
-      "groupName": "Add-on base image",
+      "groupName": "App base image",
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor", "patch"],
       "matchDepNames": ["ghcr.io/hassio-addons/debian-base"],
