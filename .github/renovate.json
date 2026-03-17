@@ -1,15 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["helpers:pinGitHubActionDigests"],
+  "extends": [
+    "helpers:pinGitHubActionDigests"
+  ],
   "rebaseWhen": "behind-base-branch",
   "dependencyDashboard": true,
-  "labels": ["dependencies", "no-stale"],
+  "labels": [
+    "dependencies",
+    "no-stale"
+  ],
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$", "(^|/)build\\.yaml$"],
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/",
+        "/(^|/)build\\.yaml$/"
+      ],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "ARG BUILD_FROM=(?<depName>.*?):(?<currentValue>.*?)\\s+",
@@ -19,7 +27,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$"],
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "\\s+(?<package>[a-z0-9][a-z0-9-]+)=(?<currentValue>[a-z0-9-:_+~.]+)\\s*"
@@ -30,7 +40,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$"],
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "FROM vaultwarden/server:(?<currentValue>[^\\s]+)"
@@ -41,25 +53,45 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["repology"],
+      "matchDatasources": [
+        "repology"
+      ],
       "automerge": true
     },
     {
       "groupName": "App base image",
-      "matchDatasources": ["docker"],
-      "matchDepNames": ["ghcr.io/hassio-addons/debian-base"]
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchDepNames": [
+        "ghcr.io/hassio-addons/debian-base"
+      ]
     },
     {
       "groupName": "App base image",
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchDepNames": ["ghcr.io/hassio-addons/debian-base"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchDepNames": [
+        "ghcr.io/hassio-addons/debian-base"
+      ],
       "automerge": true
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchDepNames": ["vaultwarden/server"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchDepNames": [
+        "vaultwarden/server"
+      ],
       "automerge": true
     }
   ]
