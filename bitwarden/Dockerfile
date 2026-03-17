@@ -17,9 +17,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY --from=vaultwarden /vaultwarden /opt/vaultwarden
 COPY --from=vaultwarden /web-vault /opt/web-vault
 
-# add Nginx
-# hadolint ignore=DL3009
 # apt-get update -qq && apt-cache policy dependency e.g. libpq5
+# hadolint ignore=DL3009
 RUN \
     apt-get update \
     \
