@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
+    "config:recommended",
     "helpers:pinGitHubActionDigests"
   ],
   "rebaseWhen": "behind-base-branch",
@@ -14,9 +15,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/(^|/)Dockerfile$/",
-        "/(^|/)build\\.yaml$/"
+      "fileMatch": [
+        "(^|/)Dockerfile$",
+        "(^|/)build\\.yaml$"
       ],
       "matchStringsStrategy": "any",
       "matchStrings": [
@@ -27,8 +28,8 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/(^|/)Dockerfile$/"
+      "fileMatch": [
+        "(^|/)Dockerfile$"
       ],
       "matchStringsStrategy": "any",
       "matchStrings": [
@@ -37,18 +38,6 @@
       "versioningTemplate": "deb",
       "datasourceTemplate": "repology",
       "depNameTemplate": "debian_13/{{{replace 'libpq5' 'postgresql-17' package}}}"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/(^|/)Dockerfile$/"
-      ],
-      "matchStringsStrategy": "any",
-      "matchStrings": [
-        "FROM vaultwarden/server:(?<currentValue>[^\\s]+)"
-      ],
-      "depNameTemplate": "vaultwarden/server",
-      "datasourceTemplate": "docker"
     }
   ],
   "packageRules": [
